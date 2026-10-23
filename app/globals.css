@@ -5,12 +5,25 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Fontes */
   --font-lufga: var(--font-lufga-local);
   --font-sans: var(--font-lufga-local);
   --font-heading: var(--font-lufga-local);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
+  /* Paleta da Synox */
+  --color-primary-orange: #ff8800;
+  --color-background-black: #141518;
+  --color-secondary-black: #1a1b1f;
+  --color-gray-01: #26272b;
+  --color-gray-02: #4e525b;
+  --color-gray-03: #838896;
+  --color-white: #ffffff;
+  --color-red: #fd2d2d;
+  --color-dark-red: #2f1f1f;
+
+  /* Cores dos componentes */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -43,6 +56,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
+  /* Arredondamento */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -53,6 +67,9 @@
 }
 
 :root {
+  /* Imagem da marca */
+  --synox-brand-background: url("/images/synox-background.png");
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -133,6 +150,29 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Background da Synox */
+
+@utility bg-synox {
+  background-image: var(--synox-brand-background);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Texto preenchido com o background da Synox */
+
+@utility text-synox {
+  background-color: var(--color-primary-orange);
+  background-image: var(--synox-brand-background);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 /* 30pt — altura de linha de 120% */
