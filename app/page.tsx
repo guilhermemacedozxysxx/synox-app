@@ -9,7 +9,7 @@ const iconSizes = ["icon", "icon-sm"] as const;
 
 export default function Home() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-12 bg-background-black px-6 py-12 text-white">
+    <main className="flex flex-1 flex-wrap items-start justify-center gap-12 bg-background-black px-6 py-12 text-white">
       <section className="flex flex-col gap-4">
         <h2 className="text-16-bold text-gray-03">Button</h2>
 
