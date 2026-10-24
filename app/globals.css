@@ -68,7 +68,7 @@
 
 :root {
   /* Imagem da marca */
-  --synox-brand-background: url("/images/synox-background.png");
+  --synox-brand-background: url("/images/synox-background.jpg");
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
