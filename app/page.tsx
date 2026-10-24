@@ -1,6 +1,7 @@
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, SearchIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const textVariants = ["primary", "secondary", "destructive", "outlined"] as const;
 const iconVariants = ["dark", "primary", "secondary", "outlined", "ghost"] as const;
@@ -36,6 +37,16 @@ export default function Home() {
             <span className="text-12-regular text-gray-03">{variant}</span>
           </div>
         ))}
+      </section>
+
+      <section className="flex w-[350px] flex-col gap-4">
+        <h2 className="text-16-bold text-gray-03">Input</h2>
+
+        <Input placeholder="Input" />
+        <Input defaultValue="Royal Barber Club" />
+        <Input placeholder="Buscar" icon={<SearchIcon strokeWidth={1.2} />} />
+        <Input placeholder="Desabilitado" disabled />
+        <Input placeholder="Inválido" aria-invalid />
       </section>
     </main>
   );
