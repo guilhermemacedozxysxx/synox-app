@@ -175,142 +175,142 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* 30pt — altura de linha de 120% */
+/* 30px — altura de linha de 120% */
 
 @utility text-30-bold {
-  font-size: 2.5rem;
+  font-size: 1.875rem;
   font-weight: 700;
-  line-height: 3rem;
+  line-height: 2.25rem;
 }
 
 @utility text-30-semibold {
-  font-size: 2.5rem;
+  font-size: 1.875rem;
   font-weight: 600;
-  line-height: 3rem;
+  line-height: 2.25rem;
 }
 
 @utility text-30-regular {
-  font-size: 2.5rem;
+  font-size: 1.875rem;
   font-weight: 400;
-  line-height: 3rem;
+  line-height: 2.25rem;
 }
 
-/* 24pt — altura de linha de 120% */
+/* 24px — altura de linha de 120% */
 
 @utility text-24-bold {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  line-height: 2.4rem;
+  line-height: 1.8rem;
 }
 
 @utility text-24-semibold {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  line-height: 2.4rem;
+  line-height: 1.8rem;
 }
 
 @utility text-24-regular {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 400;
-  line-height: 2.4rem;
+  line-height: 1.8rem;
 }
 
-/* 20pt — altura de linha de 120% */
+/* 20px — altura de linha de 120% */
 
 @utility text-20-bold {
-  font-size: 1.666667rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  line-height: 2rem;
+  line-height: 1.5rem;
 }
 
 @utility text-20-semibold {
-  font-size: 1.666667rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  line-height: 2rem;
+  line-height: 1.5rem;
 }
 
 @utility text-20-regular {
-  font-size: 1.666667rem;
+  font-size: 1.25rem;
   font-weight: 400;
-  line-height: 2rem;
+  line-height: 1.5rem;
 }
 
-/* 18pt — altura de linha de 140% */
+/* 18px — altura de linha de 140% */
 
 @utility text-18-bold {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 700;
-  line-height: 2.1rem;
+  line-height: 1.575rem;
 }
 
 @utility text-18-semibold {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  line-height: 2.1rem;
+  line-height: 1.575rem;
 }
 
 @utility text-18-regular {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 400;
-  line-height: 2.1rem;
+  line-height: 1.575rem;
 }
 
-/* 16pt — altura de linha de 140% */
+/* 16px — altura de linha de 140% */
 
 @utility text-16-bold {
-  font-size: 1.333333rem;
+  font-size: 1rem;
   font-weight: 700;
-  line-height: 1.866667rem;
+  line-height: 1.4rem;
 }
 
 @utility text-16-semibold {
-  font-size: 1.333333rem;
+  font-size: 1rem;
   font-weight: 600;
-  line-height: 1.866667rem;
+  line-height: 1.4rem;
 }
 
 @utility text-16-regular {
-  font-size: 1.333333rem;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.866667rem;
+  line-height: 1.4rem;
 }
 
-/* 14pt — altura de linha de 140% */
+/* 14px — altura de linha de 140% */
 
 @utility text-14-bold {
-  font-size: 1.166667rem;
+  font-size: 0.875rem;
   font-weight: 700;
-  line-height: 1.633333rem;
+  line-height: 1.225rem;
 }
 
 @utility text-14-semibold {
-  font-size: 1.166667rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  line-height: 1.633333rem;
+  line-height: 1.225rem;
 }
 
 @utility text-14-regular {
-  font-size: 1.166667rem;
+  font-size: 0.875rem;
   font-weight: 400;
-  line-height: 1.633333rem;
+  line-height: 1.225rem;
 }
 
-/* 12pt — altura de linha de 140% */
+/* 12px — altura de linha de 140% */
 
 @utility text-12-bold {
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  line-height: 1.4rem;
+  line-height: 1.05rem;
 }
 
 @utility text-12-semibold {
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  line-height: 1.4rem;
+  line-height: 1.05rem;
 }
 
 @utility text-12-regular {
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: 400;
-  line-height: 1.4rem;
+  line-height: 1.05rem;
 }
