@@ -2,10 +2,13 @@ import { MenuIcon, SearchIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Status } from "@/components/ui/status";
 
 const textVariants = ["primary", "secondary", "destructive", "outlined"] as const;
 const iconVariants = ["dark", "primary", "secondary", "outlined", "ghost"] as const;
 const iconSizes = ["icon", "icon-sm"] as const;
+const statuses = ["confirmado", "finalizado", "aberto", "fechado", "cancelado"] as const;
+const statusSizes = ["sm", "lg"] as const;
 
 export default function Home() {
   return (
@@ -51,6 +54,18 @@ export default function Home() {
           defaultValue="royalbarber.com"
           error="Digite um e-mail válido."
         />
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <h2 className="text-16-bold text-gray-03">Status</h2>
+
+        {statuses.map((status) => (
+          <div key={status} className="flex items-center gap-4">
+            {statusSizes.map((size) => (
+              <Status key={size} status={status} size={size} />
+            ))}
+          </div>
+        ))}
       </section>
     </main>
   );
