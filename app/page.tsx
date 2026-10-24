@@ -3,12 +3,14 @@ import { MenuIcon, SearchIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Status } from "@/components/ui/status";
+import { TimePicker, TimePickerItem } from "@/components/ui/time-picker";
 
 const textVariants = ["primary", "secondary", "destructive", "outlined"] as const;
 const iconVariants = ["dark", "primary", "secondary", "outlined", "ghost"] as const;
 const iconSizes = ["icon", "icon-sm"] as const;
 const statuses = ["confirmado", "finalizado", "aberto", "fechado", "cancelado"] as const;
 const statusSizes = ["sm", "lg"] as const;
+const times = ["09:00", "09:30", "10:00", "10:30", "11:00", "18:30"];
 
 export default function Home() {
   return (
@@ -66,6 +68,16 @@ export default function Home() {
             ))}
           </div>
         ))}
+      </section>
+
+      <section className="flex w-[350px] flex-col gap-4">
+        <h2 className="text-16-bold text-gray-03">Time Picker</h2>
+
+        <TimePicker defaultValue="18:30" aria-label="Horário">
+          {times.map((time) => (
+            <TimePickerItem key={time} value={time} disabled={time === "10:00"} />
+          ))}
+        </TimePicker>
       </section>
     </main>
   );
