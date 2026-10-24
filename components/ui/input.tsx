@@ -1,5 +1,8 @@
+"use client"
+
 import * as React from "react"
 import { Input as InputPrimitive } from "@base-ui/react/input"
+import { CircleAlertIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const inputBoxClassName =
@@ -8,11 +11,15 @@ const inputBoxClassName =
 const inputFieldClassName =
   "caret-white outline-none placeholder:text-gray-03 file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-14-regular file:text-white disabled:pointer-events-none disabled:cursor-not-allowed"
 
-type InputProps = React.ComponentProps<"input"> & {
+type InputControlProps = React.ComponentProps<"input"> & {
   icon?: React.ReactNode
 }
 
-function Input({ className, type, icon, ...props }: InputProps) {
+type InputProps = InputControlProps & {
+  error?: string
+}
+
+function InputControl({ className, type, icon, ...props }: InputControlProps) {
   if (!icon) {
     return (
       <InputPrimitive
@@ -45,6 +52,37 @@ function Input({ className, type, icon, ...props }: InputProps) {
         className={cn(inputFieldClassName, "h-full min-w-0 flex-1 bg-transparent")}
         {...props}
       />
+    </div>
+  )
+}
+
+/* Com error, o campo fica inválido e a mensagem aparece embaixo, ligada ao input pelo aria-describedby */
+
+function Input({ className, error, ...props }: InputProps) {
+  const errorId = React.useId()
+
+  if (!error) {
+    return <InputControl className={className} {...props} />
+  }
+
+  return (
+    <div
+      data-slot="input-field"
+      className={cn("flex w-full min-w-0 flex-col gap-1.5", className)}
+    >
+      <InputControl
+        aria-invalid
+        aria-describedby={errorId}
+        {...props}
+      />
+      <p
+        id={errorId}
+        data-slot="input-error"
+        className="flex items-center gap-1.5 text-12-regular text-red"
+      >
+        <CircleAlertIcon className="size-3.5 shrink-0" />
+        {error}
+      </p>
     </div>
   )
 }

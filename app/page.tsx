@@ -46,7 +46,11 @@ export default function Home() {
         <Input defaultValue="Royal Barber Club" />
         <Input placeholder="Buscar" icon={<SearchIcon strokeWidth={1.2} />} />
         <Input placeholder="Desabilitado" disabled />
-        <Input placeholder="Inválido" aria-invalid />
+        <Input
+          placeholder="E-mail"
+          defaultValue="royalbarber.com"
+          error="Digite um e-mail válido."
+        />
       </section>
     </main>
   );
