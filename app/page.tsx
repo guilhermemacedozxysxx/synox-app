@@ -1,5 +1,6 @@
 import { MenuIcon, SearchIcon } from "lucide-react";
 
+import { BookingDrawer } from "@/components/booking-drawer";
 import { BusinessCard } from "@/components/business-card";
 import { BusinessInfoCard } from "@/components/business-info-card";
 import { SchedulingCard } from "@/components/scheduling-card";
@@ -138,6 +139,20 @@ export default function Home() {
             name="Corte de Cabelo"
             description="Corte moderno com acabamento impecável."
             price={45}
+          />
+        </section>
+
+        <section className="flex flex-col gap-4">
+          <h2 className="text-16-bold text-gray-03">Booking Drawer</h2>
+
+          <BookingDrawer
+            service={{
+              name: "Corte de Cabelo",
+              description: "Corte moderno com acabamento impecável.",
+              price: 45,
+            }}
+            business={business}
+            times={["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"]}
           />
         </section>
       </div>
