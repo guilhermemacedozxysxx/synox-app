@@ -1,49 +1,44 @@
 "use client"
 
 import * as React from "react"
-import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer"
+import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { XIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-/* Drawer lateral que entra pela direita e fecha ao arrastar para a direita */
+/* Painel lateral que entra pela direita; usa o Dialog do Base UI para não ter gesto de arrastar */
 
-function Drawer({ swipeDirection = "right", ...props }: DrawerPrimitive.Root.Props) {
-  return <DrawerPrimitive.Root swipeDirection={swipeDirection} {...props} />
+function Drawer(props: DialogPrimitive.Root.Props) {
+  return <DialogPrimitive.Root {...props} />
 }
 
-function DrawerTrigger(props: DrawerPrimitive.Trigger.Props) {
-  return <DrawerPrimitive.Trigger data-slot="drawer-trigger" {...props} />
+function DrawerTrigger(props: DialogPrimitive.Trigger.Props) {
+  return <DialogPrimitive.Trigger data-slot="drawer-trigger" {...props} />
 }
 
-function DrawerClose(props: DrawerPrimitive.Close.Props) {
-  return <DrawerPrimitive.Close data-slot="drawer-close" {...props} />
+function DrawerClose(props: DialogPrimitive.Close.Props) {
+  return <DialogPrimitive.Close data-slot="drawer-close" {...props} />
 }
 
-function DrawerContent({ className, children, ...props }: DrawerPrimitive.Popup.Props) {
+function DrawerContent({ className, children, ...props }: DialogPrimitive.Popup.Props) {
   return (
-    <DrawerPrimitive.Portal>
-      <DrawerPrimitive.Backdrop
+    <DialogPrimitive.Portal>
+      <DialogPrimitive.Backdrop
         data-slot="drawer-backdrop"
         className="fixed inset-0 z-40 bg-black/60 backdrop-blur-[2px] transition-opacity duration-300 data-ending-style:opacity-0 data-starting-style:opacity-0"
       />
-      <DrawerPrimitive.Viewport
-        data-slot="drawer-viewport"
-        className="pointer-events-none fixed inset-0 z-40 flex justify-end"
+      <DialogPrimitive.Popup
+        data-slot="drawer-content"
+        className={cn(
+          "fixed inset-y-0 right-0 z-40 flex w-92.5 max-w-[calc(100vw-20px)] flex-col gap-6 overflow-x-hidden overflow-y-auto overscroll-contain bg-background-black py-6 text-white outline-none scrollbar-none transition-transform duration-300 ease-out data-ending-style:translate-x-full data-starting-style:translate-x-full",
+          className
+        )}
+        {...props}
       >
-        <DrawerPrimitive.Popup
-          data-slot="drawer-content"
-          className={cn(
-            "pointer-events-auto flex h-full w-92.5 max-w-[calc(100vw-20px)] translate-x-(--drawer-swipe-movement-x) flex-col gap-6 overflow-y-auto bg-background-black py-6 text-white outline-none transition-transform duration-300 ease-out data-ending-style:translate-x-full data-starting-style:translate-x-full data-swiping:transition-none",
-            className
-          )}
-          {...props}
-        >
-          {children}
-        </DrawerPrimitive.Popup>
-      </DrawerPrimitive.Viewport>
-    </DrawerPrimitive.Portal>
+        {children}
+      </DialogPrimitive.Popup>
+    </DialogPrimitive.Portal>
   )
 }
 
@@ -64,9 +59,9 @@ function DrawerHeader({ className, children, ...props }: React.ComponentProps<"d
   )
 }
 
-function DrawerTitle({ className, ...props }: DrawerPrimitive.Title.Props) {
+function DrawerTitle({ className, ...props }: DialogPrimitive.Title.Props) {
   return (
-    <DrawerPrimitive.Title
+    <DialogPrimitive.Title
       data-slot="drawer-title"
       className={cn("text-18-bold text-white", className)}
       {...props}
