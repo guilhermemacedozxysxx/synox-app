@@ -1,6 +1,7 @@
 import { MenuIcon, SearchIcon } from "lucide-react";
 
 import { BarberShopCard } from "@/components/barber-shop-card";
+import { SchedulingCard } from "@/components/scheduling-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Status } from "@/components/ui/status";
@@ -16,6 +17,12 @@ const barberShop = {
   name: "Royal Barber Club",
   address: "Avenida Paulista, 1450, São Paulo",
   rating: 5,
+};
+const scheduling = {
+  service: "Corte de Cabelo",
+  price: 45,
+  date: new Date("2026-09-14T18:30:00-03:00"),
+  barberShopName: barberShop.name,
 };
 
 export default function Home() {
@@ -88,15 +95,24 @@ export default function Home() {
         </section>
       </div>
 
-      <section className="flex flex-col gap-4 justify-self-start">
-        <h2 className="text-16-bold text-gray-03">Barber Shop Card</h2>
+      <div className="flex flex-wrap items-start gap-12 justify-self-start">
+        <section className="flex flex-col gap-4">
+          <h2 className="text-16-bold text-gray-03">Barber Shop Card</h2>
 
-        <div className="flex items-start gap-4">
-          <BarberShopCard variant="mobile" {...barberShop} />
-          <BarberShopCard variant="desktop" {...barberShop} />
-        </div>
-        <BarberShopCard variant="address" {...barberShop} />
-      </section>
+          <div className="flex items-start gap-4">
+            <BarberShopCard variant="mobile" {...barberShop} />
+            <BarberShopCard variant="desktop" {...barberShop} />
+          </div>
+          <BarberShopCard variant="address" {...barberShop} />
+        </section>
+
+        <section className="flex flex-col gap-4">
+          <h2 className="text-16-bold text-gray-03">Scheduling Card</h2>
+
+          <SchedulingCard variant="contracted" {...scheduling} />
+          <SchedulingCard variant="expanded" {...scheduling} />
+        </section>
+      </div>
     </main>
   );
 }
