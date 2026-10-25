@@ -81,7 +81,7 @@ function BusinessInfoCard({
               <SmartphoneIcon className="size-6 shrink-0" strokeWidth={1.2} />
               {phone}
             </span>
-            <CopyButton value={phone} aria-label={`Copiar telefone ${phone}`} />
+            <CopyButton value={phone} label={`Copiar telefone ${phone}`} />
           </li>
         ))}
       </ul>
