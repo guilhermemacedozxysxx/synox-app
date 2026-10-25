@@ -6,7 +6,19 @@ import { BusinessInfoCard } from "@/components/business-info-card";
 import { SchedulingCard } from "@/components/scheduling-card";
 import { ServiceCard } from "@/components/service-card";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogIcon,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Rating } from "@/components/ui/rating";
 import { Status } from "@/components/ui/status";
 import { TimePicker, TimePickerItem } from "@/components/ui/time-picker";
 
@@ -172,6 +184,56 @@ export default function Home() {
               status: "confirmado",
             }}
           />
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-4 justify-self-start">
+        <h2 className="text-16-bold text-gray-03">Dialog</h2>
+
+        <div className="flex flex-wrap items-center gap-4">
+          <Dialog>
+            <DialogTrigger render={<Button variant="secondary" />}>Default</DialogTrigger>
+            <DialogContent>
+              <DialogIcon />
+              <DialogHeader>
+                <DialogTitle>Reserva confirmada</DialogTitle>
+                <DialogDescription>Seu horário foi reservado com sucesso.</DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <DialogClose render={<Button variant="secondary" />}>Fechar</DialogClose>
+                <DialogClose render={<Button />}>Ver reserva</DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
+          <Dialog>
+            <DialogTrigger render={<Button variant="secondary" />}>Small</DialogTrigger>
+            <DialogContent size="sm">
+              <DialogHeader>
+                <DialogTitle>Sair da conta</DialogTitle>
+                <DialogDescription>Deseja mesmo sair?</DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <DialogClose render={<Button variant="secondary" />}>Não</DialogClose>
+                <DialogClose render={<Button />}>Sim</DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
+          <Dialog>
+            <DialogTrigger render={<Button variant="secondary" />}>Rating</DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Avalie o atendimento</DialogTitle>
+                <DialogDescription>Como foi sua experiência no {business.name}?</DialogDescription>
+              </DialogHeader>
+              <Rating aria-label="Nota do atendimento" />
+              <DialogFooter>
+                <DialogClose render={<Button variant="secondary" />}>Agora não</DialogClose>
+                <DialogClose render={<Button />}>Enviar</DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </section>
     </main>
