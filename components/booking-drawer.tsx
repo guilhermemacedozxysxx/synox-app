@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/drawer"
 import { TimePicker, TimePickerItem } from "@/components/ui/time-picker"
 import { toast } from "@/components/ui/toast"
+import { useDragScroll } from "@/hooks/use-drag-scroll"
+import { cn } from "@/lib/utils"
 
 type BookingDrawerProps = {
   service: {
@@ -60,6 +62,7 @@ function BookingDrawer({
   const [open, setOpen] = React.useState(false)
   const [day, setDay] = React.useState<Date | null>(null)
   const [time, setTime] = React.useState("")
+  const { isDragging: isDraggingTimes, ...timesDragProps } = useDragScroll<HTMLDivElement>()
 
   const bookingDate = day && time ? toBookingDate(day, time) : null
 
@@ -107,10 +110,14 @@ function BookingDrawer({
         <BookingDrawerDivider />
 
         <TimePicker
+          {...timesDragProps}
           value={time}
           onValueChange={setTime}
           aria-label="Horário"
-          className="shrink-0 flex-nowrap gap-3 overflow-x-auto px-5 scrollbar-none"
+          className={cn(
+            "shrink-0 cursor-grab flex-nowrap gap-3 overflow-x-auto overscroll-x-contain px-5 select-none scrollbar-none",
+            isDraggingTimes && "cursor-grabbing **:cursor-grabbing"
+          )}
         >
           {times.map((item) => (
             <TimePickerItem key={item} value={item} disabled={!day} />
