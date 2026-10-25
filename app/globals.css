@@ -175,6 +175,35 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Brilho metálico do skeleton: uma faixa de luz cinza clara. O background fixo faz uma única faixa atravessar todos os blocos da tela ao mesmo tempo */
+
+@theme {
+  --animate-shimmer: shimmer 2s ease-in-out infinite;
+
+  @keyframes shimmer {
+    from {
+      background-position: 150% 0;
+    }
+    to {
+      background-position: -50% 0;
+    }
+  }
+}
+
+@utility skeleton-shimmer {
+  background-image: linear-gradient(
+    100deg,
+    transparent 30%,
+    color-mix(in oklab, var(--color-white) 8%, transparent) 42%,
+    color-mix(in oklab, var(--color-white) 12%, transparent) 50%,
+    color-mix(in oklab, var(--color-white) 8%, transparent) 58%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 /* 30px — altura de linha de 120% */
 
 @utility text-30-bold {
