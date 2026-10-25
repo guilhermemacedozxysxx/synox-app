@@ -1,6 +1,7 @@
 import * as React from "react"
 import Image from "next/image"
 
+import { Skeleton } from "@/components/ui/skeleton"
 import { Status } from "@/components/ui/status"
 import { cn } from "@/lib/utils"
 
@@ -124,4 +125,68 @@ function SchedulingCard({
   )
 }
 
-export { SchedulingCard }
+/* Mesmo tamanho e formato de cada variante, para a página não "pular" quando os dados chegam */
+
+function SchedulingCardSkeleton({
+  variant = "contracted",
+  className,
+}: Pick<SchedulingCardProps, "variant" | "className">) {
+  if (variant === "expanded") {
+    return (
+      <div
+        data-slot="scheduling-card-skeleton"
+        aria-busy
+        aria-label="Carregando agendamento"
+        className={cn(
+          "flex w-82.5 flex-col gap-3 rounded-lg border border-gray-01 bg-secondary-black p-3",
+          className
+        )}
+      >
+        <div className="flex items-center justify-between gap-4">
+          <Skeleton className="h-5 w-32" />
+          <Skeleton className="h-4 w-16" />
+        </div>
+
+        {["w-24", "w-12", "w-32"].map((valueWidth) => (
+          <div key={valueWidth} className="flex items-center justify-between gap-4">
+            <Skeleton className="h-4 w-16" />
+            <Skeleton className={cn("h-4", valueWidth)} />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  return (
+    <div
+      data-slot="scheduling-card-skeleton"
+      aria-busy
+      aria-label="Carregando agendamento"
+      className={cn(
+        "flex w-87.5 rounded-lg border border-gray-01 bg-secondary-black",
+        className
+      )}
+    >
+      <div className="flex min-w-0 flex-1 flex-col justify-center gap-3 p-3">
+        <Skeleton className="h-5 w-22 rounded-full" />
+
+        <div className="flex flex-col gap-2">
+          <Skeleton className="h-5 w-32" />
+
+          <div className="flex items-center gap-2">
+            <Skeleton className="size-6 shrink-0 rounded-full" />
+            <Skeleton className="h-4 w-28" />
+          </div>
+        </div>
+      </div>
+
+      <div className="flex w-26.5 shrink-0 flex-col items-center justify-center gap-1.5 border-l border-gray-01 py-3">
+        <Skeleton className="h-3 w-14" />
+        <Skeleton className="h-7 w-8" />
+        <Skeleton className="h-3 w-10" />
+      </div>
+    </div>
+  )
+}
+
+export { SchedulingCard, SchedulingCardSkeleton }
