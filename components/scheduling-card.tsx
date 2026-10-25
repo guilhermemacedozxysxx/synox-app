@@ -9,8 +9,8 @@ type SchedulingCardProps = {
   service: string
   price?: number
   date: Date
-  barberShopName: string
-  barberShopImageUrl?: string
+  businessName: string
+  businessImageUrl?: string
   status?: React.ComponentProps<typeof Status>["status"]
   className?: string
 }
@@ -49,8 +49,8 @@ function SchedulingCard({
   service,
   price,
   date,
-  barberShopName,
-  barberShopImageUrl,
+  businessName,
+  businessImageUrl,
   status = "confirmado",
   className,
 }: SchedulingCardProps) {
@@ -76,7 +76,7 @@ function SchedulingCard({
 
         <SchedulingCardRow label="Data" value={`${day} de ${month}`} />
         <SchedulingCardRow label="Horário" value={time} />
-        <SchedulingCardRow label="Barbearia" value={barberShopName} />
+        <SchedulingCardRow label="Local" value={businessName} />
       </article>
     )
   }
@@ -97,9 +97,9 @@ function SchedulingCard({
 
           <div className="flex items-center gap-2">
             <div className="relative size-6 shrink-0 overflow-hidden rounded-full bg-synox">
-              {barberShopImageUrl && (
+              {businessImageUrl && (
                 <Image
-                  src={barberShopImageUrl}
+                  src={businessImageUrl}
                   alt=""
                   fill
                   sizes="24px"
@@ -107,7 +107,7 @@ function SchedulingCard({
                 />
               )}
             </div>
-            <span className="truncate text-14-regular text-white">{barberShopName}</span>
+            <span className="truncate text-14-regular text-white">{businessName}</span>
           </div>
         </div>
       </div>
