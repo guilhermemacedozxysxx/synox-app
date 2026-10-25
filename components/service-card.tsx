@@ -1,3 +1,4 @@
+import * as React from "react"
 import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
@@ -9,6 +10,7 @@ type ServiceCardProps = {
   price: number
   imageUrl?: string
   onReserve?: () => void
+  action?: React.ReactNode
   className?: string
 }
 
@@ -23,6 +25,7 @@ function ServiceCard({
   price,
   imageUrl,
   onReserve,
+  action,
   className,
 }: ServiceCardProps) {
   return (
@@ -49,9 +52,11 @@ function ServiceCard({
           <span className="text-14-bold whitespace-nowrap text-white">
             {priceFormatter.format(price)}
           </span>
-          <Button variant="secondary" onClick={onReserve}>
-            Reservar
-          </Button>
+          {action ?? (
+            <Button variant="secondary" onClick={onReserve}>
+              Reservar
+            </Button>
+          )}
         </div>
       </div>
     </article>
