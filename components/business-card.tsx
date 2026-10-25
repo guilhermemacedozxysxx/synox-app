@@ -4,7 +4,7 @@ import { StarIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-type BarberShopCardProps = {
+type BusinessCardProps = {
   variant?: "mobile" | "desktop" | "address"
   name: string
   address: string
@@ -21,7 +21,7 @@ const ratingFormatter = new Intl.NumberFormat("pt-BR", {
 
 /* Mapa do Google sem chave de API; os tamanhos extras empurram para fora da área visível o cartão de "Ver mapa ampliado" e os controles do Google */
 
-function BarberShopMap({ address }: { address: string }) {
+function BusinessMap({ address }: { address: string }) {
   const query = encodeURIComponent(address)
 
   return (
@@ -37,7 +37,7 @@ function BarberShopMap({ address }: { address: string }) {
   )
 }
 
-function BarberShopCard({
+function BusinessCard({
   variant = "mobile",
   name,
   address,
@@ -45,17 +45,17 @@ function BarberShopCard({
   rating,
   onReserve,
   className,
-}: BarberShopCardProps) {
+}: BusinessCardProps) {
   if (variant === "address") {
     return (
       <article
-        data-slot="barber-shop-card"
+        data-slot="business-card"
         className={cn(
           "relative isolate flex h-45 w-82.5 items-end justify-center overflow-hidden rounded-lg bg-secondary-black p-5",
           className
         )}
       >
-        <BarberShopMap address={address} />
+        <BusinessMap address={address} />
 
         <div className="relative flex w-full items-center gap-3 rounded-lg bg-secondary-black px-5 py-3 text-white">
           <div className="relative size-12 shrink-0 overflow-hidden rounded-full bg-synox">
@@ -76,7 +76,7 @@ function BarberShopCard({
 
   return (
     <article
-      data-slot="barber-shop-card"
+      data-slot="business-card"
       className={cn(
         "flex flex-col rounded-2xl border border-gray-01 bg-secondary-black",
         isDesktop ? "w-55" : "w-41.75",
@@ -118,4 +118,4 @@ function BarberShopCard({
   )
 }
 
-export { BarberShopCard }
+export { BusinessCard }
