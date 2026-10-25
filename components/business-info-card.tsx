@@ -119,9 +119,7 @@ function BusinessInfoCard({
 
           <footer className="flex items-center justify-between py-5">
             <span className="text-14-regular text-white">Em parceria com</span>
-            <div className="w-32.5">
-              <Image src="/images/synox-symbol.svg" alt="Synox" width={38} height={40} />
-            </div>
+            <Image src="/images/synox-symbol.svg" alt="Synox" width={38} height={40} />
           </footer>
         </>
       )}
