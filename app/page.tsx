@@ -1,10 +1,10 @@
 import { MenuIcon, SearchIcon } from "lucide-react";
 
 import { BookingDrawer } from "@/components/booking-drawer";
-import { BusinessCard } from "@/components/business-card";
+import { BusinessCard, BusinessCardSkeleton } from "@/components/business-card";
 import { BusinessInfoCard } from "@/components/business-info-card";
-import { SchedulingCard } from "@/components/scheduling-card";
-import { ServiceCard } from "@/components/service-card";
+import { SchedulingCard, SchedulingCardSkeleton } from "@/components/scheduling-card";
+import { ServiceCard, ServiceCardSkeleton } from "@/components/service-card";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Rating } from "@/components/ui/rating";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Status } from "@/components/ui/status";
 import { TimePicker, TimePickerItem } from "@/components/ui/time-picker";
 
@@ -234,6 +235,61 @@ export default function Home() {
               </DialogFooter>
             </DialogContent>
           </Dialog>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-6 justify-self-start">
+        <h2 className="text-16-bold text-gray-03">Skeleton</h2>
+
+        <div className="flex flex-wrap items-start gap-12">
+          <div className="flex flex-col gap-4">
+            <span className="text-12-regular text-gray-03">Button e Icon Button</span>
+            <div className="flex items-center gap-4">
+              <Skeleton className="h-9 w-22 rounded-lg" />
+              <Skeleton className="size-10" />
+              <Skeleton className="size-8" />
+            </div>
+          </div>
+
+          <div className="flex w-87.5 flex-col gap-4">
+            <span className="text-12-regular text-gray-03">Input</span>
+            <Skeleton className="h-9 w-full" />
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <span className="text-12-regular text-gray-03">Status e Time Picker</span>
+            <div className="flex items-center gap-2">
+              <Skeleton className="h-5 w-22 rounded-full" />
+              <Skeleton className="h-6 w-24 rounded-full" />
+            </div>
+            <div className="flex items-center gap-2">
+              {Array.from({ length: 4 }, (_, index) => (
+                <Skeleton key={index} className="h-9 w-16 rounded-full" />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-start gap-12">
+          <div className="flex flex-col gap-4">
+            <span className="text-12-regular text-gray-03">Business Card</span>
+            <div className="flex items-start gap-4">
+              <BusinessCardSkeleton variant="mobile" />
+              <BusinessCardSkeleton variant="desktop" />
+            </div>
+            <BusinessCardSkeleton variant="address" />
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <span className="text-12-regular text-gray-03">Scheduling Card</span>
+            <SchedulingCardSkeleton variant="contracted" />
+            <SchedulingCardSkeleton variant="expanded" />
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <span className="text-12-regular text-gray-03">Service Card</span>
+            <ServiceCardSkeleton />
+          </div>
         </div>
       </section>
     </main>
