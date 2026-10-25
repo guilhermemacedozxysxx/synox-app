@@ -2,6 +2,7 @@ import { MenuIcon, SearchIcon } from "lucide-react";
 
 import { BarberShopCard } from "@/components/barber-shop-card";
 import { SchedulingCard } from "@/components/scheduling-card";
+import { ServiceCard } from "@/components/service-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Status } from "@/components/ui/status";
@@ -111,6 +112,16 @@ export default function Home() {
 
           <SchedulingCard variant="contracted" {...scheduling} />
           <SchedulingCard variant="expanded" {...scheduling} />
+        </section>
+
+        <section className="flex flex-col gap-4">
+          <h2 className="text-16-bold text-gray-03">Service Card</h2>
+
+          <ServiceCard
+            name="Corte de Cabelo"
+            description="Corte moderno com acabamento impecável."
+            price={45}
+          />
         </section>
       </div>
     </main>
