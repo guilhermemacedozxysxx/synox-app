@@ -6,6 +6,16 @@ import { BusinessCard } from "@/components/business-card"
 import { CopyButton } from "@/components/copy-button"
 import { SchedulingCard } from "@/components/scheduling-card"
 import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { Status } from "@/components/ui/status"
 import { cn } from "@/lib/utils"
 
@@ -100,9 +110,29 @@ function BusinessInfoCard({
             />
           </section>
 
-          <Button variant="destructive" className="w-full" onClick={onCancelBooking}>
-            Cancelar Reserva
-          </Button>
+          <Dialog>
+            <DialogTrigger render={<Button variant="destructive" className="w-full" />}>
+              Cancelar Reserva
+            </DialogTrigger>
+
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Cancelar reserva</DialogTitle>
+                <DialogDescription>
+                  Tem certeza que deseja cancelar esta reserva? Essa ação não pode ser desfeita.
+                </DialogDescription>
+              </DialogHeader>
+
+              <DialogFooter>
+                <DialogClose render={<Button variant="secondary" />}>Voltar</DialogClose>
+                <DialogClose
+                  render={<Button variant="destructive" onClick={onCancelBooking} />}
+                >
+                  Cancelar
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </>
       ) : (
         <>
