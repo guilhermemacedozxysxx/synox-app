@@ -2,6 +2,7 @@ import Image from "next/image"
 import { StarIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
 
 type BusinessCardProps = {
@@ -118,4 +119,64 @@ function BusinessCard({
   )
 }
 
-export { BusinessCard }
+/* Mesmo tamanho e formato de cada variante, para a página não "pular" quando os dados chegam */
+
+function BusinessCardSkeleton({
+  variant = "mobile",
+  className,
+}: Pick<BusinessCardProps, "variant" | "className">) {
+  if (variant === "address") {
+    return (
+      <div
+        data-slot="business-card-skeleton"
+        aria-busy
+        aria-label="Carregando estabelecimento"
+        className={cn(
+          "relative isolate flex h-45 w-82.5 items-end justify-center overflow-hidden rounded-lg bg-secondary-black p-5",
+          className
+        )}
+      >
+        <Skeleton className="absolute inset-0 -z-10 rounded-none opacity-40" />
+
+        <div className="flex w-full items-center gap-3 rounded-lg bg-secondary-black px-5 py-3">
+          <Skeleton className="size-12 shrink-0 rounded-full" />
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-3 w-full" />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const isDesktop = variant === "desktop"
+
+  return (
+    <div
+      data-slot="business-card-skeleton"
+      aria-busy
+      aria-label="Carregando estabelecimento"
+      className={cn(
+        "flex flex-col rounded-2xl border border-gray-01 bg-secondary-black",
+        isDesktop ? "w-55" : "w-41.75",
+        className
+      )}
+    >
+      <div className={cn("px-1 pt-1", !isDesktop && "pb-2")}>
+        <Skeleton className="h-39.75 rounded-2xl" />
+      </div>
+
+      <div className={cn("flex flex-col gap-3 px-3 pb-3", isDesktop && "pt-3")}>
+        <div className="flex flex-col gap-2">
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-3 w-full" />
+          <Skeleton className="h-3 w-1/2" />
+        </div>
+
+        <Skeleton className="h-9 w-full rounded-lg" />
+      </div>
+    </div>
+  )
+}
+
+export { BusinessCard, BusinessCardSkeleton }
