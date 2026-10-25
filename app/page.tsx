@@ -1,6 +1,7 @@
 import { MenuIcon, SearchIcon } from "lucide-react";
 
-import { BarberShopCard } from "@/components/barber-shop-card";
+import { BusinessCard } from "@/components/business-card";
+import { BusinessInfoCard } from "@/components/business-info-card";
 import { SchedulingCard } from "@/components/scheduling-card";
 import { ServiceCard } from "@/components/service-card";
 import { Button } from "@/components/ui/button";
@@ -14,7 +15,7 @@ const iconSizes = ["icon", "icon-sm"] as const;
 const statuses = ["confirmado", "finalizado", "aberto", "fechado", "cancelado"] as const;
 const statusSizes = ["sm", "lg"] as const;
 const times = ["09:00", "09:30", "10:00", "10:30", "11:00", "18:30"];
-const barberShop = {
+const business = {
   name: "Royal Barber Club",
   address: "Avenida Paulista, 1450, São Paulo",
   rating: 5,
@@ -23,7 +24,23 @@ const scheduling = {
   service: "Corte de Cabelo",
   price: 45,
   date: new Date("2026-09-14T18:30:00-03:00"),
-  barberShopName: barberShop.name,
+  businessName: business.name,
+};
+const businessInfo = {
+  name: business.name,
+  address: business.address,
+  description:
+    "Bem-vindo à Royal Barber Club, onde elegância e tradição se encontram. Nossa equipe oferece cortes de cabelo e barba com excelência, em um ambiente sofisticado, pensado para proporcionar estilo, confiança e uma experiência única.",
+  phones: ["(00) 00000-0000", "(00) 00000-0000"],
+  openingHours: [
+    { day: "Segunda", hours: null },
+    { day: "Terça-Feira", hours: "09:00 - 21:00" },
+    { day: "Quarta-Feira", hours: "09:00 - 21:00" },
+    { day: "Quinta-Feira", hours: "09:00 - 21:00" },
+    { day: "Sexta-Feira", hours: "09:00 - 21:00" },
+    { day: "Sábado", hours: "08:00 - 17:00" },
+    { day: "Domingo", hours: null },
+  ],
 };
 
 export default function Home() {
@@ -98,13 +115,13 @@ export default function Home() {
 
       <div className="flex flex-wrap items-start gap-12 justify-self-start">
         <section className="flex flex-col gap-4">
-          <h2 className="text-16-bold text-gray-03">Barber Shop Card</h2>
+          <h2 className="text-16-bold text-gray-03">Business Card</h2>
 
           <div className="flex items-start gap-4">
-            <BarberShopCard variant="mobile" {...barberShop} />
-            <BarberShopCard variant="desktop" {...barberShop} />
+            <BusinessCard variant="mobile" {...business} />
+            <BusinessCard variant="desktop" {...business} />
           </div>
-          <BarberShopCard variant="address" {...barberShop} />
+          <BusinessCard variant="address" {...business} />
         </section>
 
         <section className="flex flex-col gap-4">
@@ -124,6 +141,24 @@ export default function Home() {
           />
         </section>
       </div>
+
+      <section className="flex flex-col gap-4 justify-self-start">
+        <h2 className="text-16-bold text-gray-03">Business Info Card</h2>
+
+        <div className="flex flex-wrap items-start gap-5">
+          <BusinessInfoCard variant="info" {...businessInfo} />
+          <BusinessInfoCard
+            variant="booking"
+            {...businessInfo}
+            booking={{
+              service: scheduling.service,
+              price: scheduling.price,
+              date: scheduling.date,
+              status: "confirmado",
+            }}
+          />
+        </div>
+      </section>
     </main>
   );
 }
