@@ -3,6 +3,7 @@
 import * as React from "react"
 
 import { BusinessCard } from "@/components/business-card"
+import { ProfessionalPicker, type Professional } from "@/components/professional-picker"
 import { SchedulingCard } from "@/components/scheduling-card"
 import { ServiceCard } from "@/components/service-card"
 import { Button } from "@/components/ui/button"
@@ -32,8 +33,10 @@ type BookingDrawerProps = {
     imageUrl?: string
   }
   times: string[]
+  professionals?: Professional[]
   isDateDisabled?: (date: Date) => boolean
-  onConfirm?: (booking: { date: Date }) => void
+  isProfessionalAvailable?: (professional: Professional, date: Date) => boolean
+  onConfirm?: (booking: { date: Date; professionalId?: string }) => void
   className?: string
 }
 
@@ -55,16 +58,22 @@ function BookingDrawer({
   service,
   business,
   times,
+  professionals = [],
   isDateDisabled,
+  isProfessionalAvailable,
   onConfirm,
   className,
 }: BookingDrawerProps) {
   const [open, setOpen] = React.useState(false)
   const [day, setDay] = React.useState<Date | null>(null)
   const [time, setTime] = React.useState("")
+  const [professionalId, setProfessionalId] = React.useState("")
   const { isDragging: isDraggingTimes, ...timesDragProps } = useDragScroll<HTMLDivElement>()
 
   const bookingDate = day && time ? toBookingDate(day, time) : null
+  const hasProfessionals = professionals.length > 0
+  const professional = professionals.find((item) => item.id === professionalId)
+  const isComplete = !!bookingDate && (!hasProfessionals || !!professional)
 
   function handleOpenChange(nextOpen: boolean) {
     setOpen(nextOpen)
@@ -72,13 +81,26 @@ function BookingDrawer({
     if (!nextOpen) {
       setDay(null)
       setTime("")
+      setProfessionalId("")
     }
   }
 
-  function handleConfirm() {
-    if (!bookingDate) return
+  /* Trocar o dia ou o horário pode mudar quem está disponível, então a escolha do profissional é limpa */
 
-    onConfirm?.({ date: bookingDate })
+  function handleDayChange(nextDay: Date) {
+    setDay(nextDay)
+    setProfessionalId("")
+  }
+
+  function handleTimeChange(nextTime: string) {
+    setTime(nextTime)
+    setProfessionalId("")
+  }
+
+  function handleConfirm() {
+    if (!bookingDate || !isComplete) return
+
+    onConfirm?.({ date: bookingDate, professionalId: professional?.id })
     toast("Reserva confirmada")
     handleOpenChange(false)
   }
@@ -102,7 +124,7 @@ function BookingDrawer({
 
         <Calendar
           value={day}
-          onValueChange={setDay}
+          onValueChange={handleDayChange}
           isDateDisabled={isDateDisabled}
           className="px-5"
         />
@@ -112,7 +134,7 @@ function BookingDrawer({
         <TimePicker
           {...timesDragProps}
           value={time}
-          onValueChange={setTime}
+          onValueChange={handleTimeChange}
           aria-label="Horário"
           className={cn(
             "shrink-0 cursor-grab flex-nowrap gap-3 overflow-x-auto overscroll-x-contain px-5 select-none scrollbar-none",
@@ -126,19 +148,43 @@ function BookingDrawer({
 
         <BookingDrawerDivider />
 
+        {hasProfessionals && bookingDate && (
+          <>
+            <section className="flex flex-col gap-3">
+              <h3 className="px-5 text-14-bold text-white">Escolha o profissional</h3>
+              <ProfessionalPicker
+                professionals={professionals}
+                businessName={business.name}
+                isProfessionalDisabled={(item) =>
+                  isProfessionalAvailable ? !isProfessionalAvailable(item, bookingDate) : false
+                }
+                value={professionalId}
+                onValueChange={setProfessionalId}
+                aria-label="Profissional"
+                className="px-5"
+              />
+            </section>
+
+            <BookingDrawerDivider />
+          </>
+        )}
+
         <div className="flex flex-col gap-3 px-5">
-          {bookingDate ? (
+          {isComplete && bookingDate ? (
             <SchedulingCard
               variant="expanded"
               service={service.name}
               price={service.price}
               date={bookingDate}
               businessName={business.name}
+              professionalName={professional?.name}
               className="w-full"
             />
           ) : (
             <p className="text-14-regular text-gray-03">
-              Escolha o dia e o horário para ver o resumo da reserva.
+              {bookingDate
+                ? "Escolha o profissional para ver o resumo da reserva."
+                : "Escolha o dia e o horário para ver o resumo da reserva."}
             </p>
           )}
 
@@ -152,7 +198,7 @@ function BookingDrawer({
         </div>
 
         <div className="mt-auto px-5">
-          <Button className="w-full" disabled={!bookingDate} onClick={handleConfirm}>
+          <Button className="w-full" disabled={!isComplete} onClick={handleConfirm}>
             Confirmar
           </Button>
         </div>
