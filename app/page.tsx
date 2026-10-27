@@ -29,6 +29,13 @@ const iconSizes = ["icon", "icon-sm"] as const;
 const statuses = ["confirmado", "finalizado", "aberto", "fechado", "cancelado"] as const;
 const statusSizes = ["sm", "lg"] as const;
 const times = ["09:00", "09:30", "10:00", "10:30", "11:00", "18:30"];
+const professionals = [
+  { id: "roberto", name: "Roberto" },
+  { id: "carlos", name: "Carlos" },
+  { id: "geraldo", name: "Geraldo" },
+  { id: "diego", name: "Diego" },
+  { id: "jonathan", name: "Jonathan" },
+];
 const business = {
   name: "Royal Barber Club",
   address: "Avenida Paulista, 1450, São Paulo",
@@ -166,6 +173,7 @@ export default function Home() {
             }}
             business={business}
             times={["18:00", "18:30", "19:00", "19:30", "20:00", "20:30"]}
+            professionals={professionals}
           />
         </section>
       </div>
