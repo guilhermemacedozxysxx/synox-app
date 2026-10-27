@@ -12,6 +12,7 @@ type SchedulingCardProps = {
   date: Date
   businessName: string
   businessImageUrl?: string
+  professionalName?: string
   status?: React.ComponentProps<typeof Status>["status"]
   className?: string
 }
@@ -52,6 +53,7 @@ function SchedulingCard({
   date,
   businessName,
   businessImageUrl,
+  professionalName,
   status = "confirmado",
   className,
 }: SchedulingCardProps) {
@@ -78,6 +80,7 @@ function SchedulingCard({
         <SchedulingCardRow label="Data" value={`${day} de ${month}`} />
         <SchedulingCardRow label="Horário" value={time} />
         <SchedulingCardRow label="Local" value={businessName} />
+        {professionalName && <SchedulingCardRow label="Profissional" value={professionalName} />}
       </article>
     )
   }
