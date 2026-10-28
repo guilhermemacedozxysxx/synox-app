@@ -204,6 +204,26 @@
   background-attachment: fixed;
 }
 
+/* Cursor de texto piscando mais devagar que o padrão do sistema: o caret-animation desliga o piscar nativo e a animação alterna a cor do cursor. Navegadores sem suporte mantêm o piscar normal */
+
+@keyframes caret-blink-slow {
+  0% {
+    caret-color: var(--color-white, #ffffff);
+  }
+  50% {
+    caret-color: transparent;
+  }
+}
+
+@utility caret-blink-slow {
+  caret-color: var(--color-white, #ffffff);
+
+  @supports (caret-animation: manual) {
+    caret-animation: manual;
+    animation: caret-blink-slow 1.6s steps(1) infinite;
+  }
+}
+
 /* 30px — altura de linha de 120% */
 
 @utility text-30-bold {
