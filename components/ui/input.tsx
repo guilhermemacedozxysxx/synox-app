@@ -9,7 +9,7 @@ const inputBoxClassName =
   "flex h-9 w-full min-w-0 items-center gap-2 rounded-md border border-gray-01 bg-secondary-black px-3 text-14-regular text-white transition-[border-color,box-shadow]"
 
 const inputFieldClassName =
-  "caret-white outline-none placeholder:text-gray-03 file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-14-regular file:text-white disabled:pointer-events-none disabled:cursor-not-allowed"
+  "caret-blink-slow outline-none placeholder:text-gray-03 file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-14-regular file:text-white disabled:pointer-events-none disabled:cursor-not-allowed"
 
 type InputControlProps = React.ComponentProps<"input"> & {
   icon?: React.ReactNode
