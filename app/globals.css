@@ -5,12 +5,25 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Fontes */
   --font-lufga: var(--font-lufga-local);
   --font-sans: var(--font-lufga-local);
   --font-heading: var(--font-lufga-local);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
+  /* Paleta da Synox */
+  --color-primary-orange: #ff8800;
+  --color-background-black: #141518;
+  --color-secondary-black: #1a1b1f;
+  --color-gray-01: #26272b;
+  --color-gray-02: #4e525b;
+  --color-gray-03: #838896;
+  --color-white: #ffffff;
+  --color-red: #dc2626;
+  --color-dark-red: #2f1f1f;
+
+  /* Cores dos componentes */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -43,6 +56,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
+  /* Arredondamento */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -53,6 +67,9 @@
 }
 
 :root {
+  /* Imagem da marca */
+  --synox-brand-background: url("/images/synox-background.jpg");
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -133,4 +150,216 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Background da Synox */
+
+@utility bg-synox {
+  background-image: var(--synox-brand-background);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Texto preenchido com o background da Synox */
+
+@utility text-synox {
+  background-color: var(--color-primary-orange);
+  background-image: var(--synox-brand-background);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Brilho metálico do skeleton: uma faixa de luz cinza clara. O background fixo faz uma única faixa atravessar todos os blocos da tela ao mesmo tempo */
+
+@theme {
+  --animate-shimmer: shimmer 2s ease-in-out infinite;
+
+  @keyframes shimmer {
+    from {
+      background-position: 150% 0;
+    }
+    to {
+      background-position: -50% 0;
+    }
+  }
+}
+
+@utility skeleton-shimmer {
+  background-image: linear-gradient(
+    100deg,
+    transparent 30%,
+    color-mix(in oklab, var(--color-white) 8%, transparent) 42%,
+    color-mix(in oklab, var(--color-white) 12%, transparent) 50%,
+    color-mix(in oklab, var(--color-white) 8%, transparent) 58%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Cursor de texto piscando mais devagar que o padrão do sistema: o caret-animation desliga o piscar nativo e a animação alterna a cor do cursor. Navegadores sem suporte mantêm o piscar normal */
+
+@keyframes caret-blink-slow {
+  0% {
+    caret-color: var(--color-white, #ffffff);
+  }
+  50% {
+    caret-color: transparent;
+  }
+}
+
+@utility caret-blink-slow {
+  caret-color: var(--color-white, #ffffff);
+
+  @supports (caret-animation: manual) {
+    caret-animation: manual;
+    animation: caret-blink-slow 1.6s steps(1) infinite;
+  }
+}
+
+/* 30px — altura de linha de 120% */
+
+@utility text-30-bold {
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 2.25rem;
+}
+
+@utility text-30-semibold {
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 2.25rem;
+}
+
+@utility text-30-regular {
+  font-size: 1.875rem;
+  font-weight: 400;
+  line-height: 2.25rem;
+}
+
+/* 24px — altura de linha de 120% */
+
+@utility text-24-bold {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.8rem;
+}
+
+@utility text-24-semibold {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.8rem;
+}
+
+@utility text-24-regular {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.8rem;
+}
+
+/* 20px — altura de linha de 120% */
+
+@utility text-20-bold {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+
+@utility text-20-semibold {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+@utility text-20-regular {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+/* 18px — altura de linha de 140% */
+
+@utility text-18-bold {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.575rem;
+}
+
+@utility text-18-semibold {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.575rem;
+}
+
+@utility text-18-regular {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.575rem;
+}
+
+/* 16px — altura de linha de 140% */
+
+@utility text-16-bold {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4rem;
+}
+
+@utility text-16-semibold {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4rem;
+}
+
+@utility text-16-regular {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4rem;
+}
+
+/* 14px — altura de linha de 140% */
+
+@utility text-14-bold {
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.225rem;
+}
+
+@utility text-14-semibold {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.225rem;
+}
+
+@utility text-14-regular {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.225rem;
+}
+
+/* 12px — altura de linha de 140% */
+
+@utility text-12-bold {
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.05rem;
+}
+
+@utility text-12-semibold {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.05rem;
+}
+
+@utility text-12-regular {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.05rem;
 }
